@@ -41,3 +41,14 @@ jobs:
       # cluster ships no unit tests; --no-tests=ignore keeps that from failing.
       - name: Test
         run: ctest --test-dir build -C Release --output-on-failure --no-tests=ignore
+
+  imu-to-smpl:
+    name: imu_to_smpl self-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy
+      - run: python adapters/imu_to_smpl.py --self-test
